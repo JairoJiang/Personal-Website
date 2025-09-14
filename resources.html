@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资源分享 - 我的简历网站</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">文酱不酱</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="about.html">关于我</a></li>
+                <li><a href="writing.html">文字创作</a></li>
+                <li><a href="projects.html">成就与项目</a></li>
+                <li><a href="resources.html">资源分享</a></li>
+                <li><a href="contact.html">联系方式</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main class="main-content">
+        <div class="container">
+            <section class="resources-hero">
+            <h1>资源分享</h1>
+                <p class="resources-subtitle">精选优质资源，与大家共同成长</p>
+            </section>
+
+            <section class="resources-content">
+                <div class="resources-categories">
+                    <button class="resource-category-btn active" data-category="all">全部资源</button>
+                    <button class="resource-category-btn" data-category="books">书籍推荐</button>
+                    <button class="resource-category-btn" data-category="tools">工具软件</button>
+                    <button class="resource-category-btn" data-category="websites">网站推荐</button>
+                    <button class="resource-category-btn" data-category="learning">学习资源</button>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-item" data-category="books">
+                        <div class="resource-icon">📚</div>
+                        <div class="resource-content">
+                            <h3>《代码整洁之道》</h3>
+                            <p class="resource-description">Robert C. Martin的经典之作，教你如何写出清晰、可维护的代码。适合所有程序员阅读。</p>
+                            <div class="resource-tags">
+                                <span class="resource-tag">编程</span>
+                                <span class="resource-tag">软件工程</span>
+                            </div>
+                            <a href="#" class="resource-link">了解更多 →</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-item" data-category="tools">
+                        <div class="resource-icon">🔧</div>
+                        <div class="resource-content">
+                            <h3>VS Code</h3>
+                            <p class="resource-description">微软开发的免费代码编辑器，功能强大，插件丰富，是开发者的首选工具。</p>
+                            <div class="resource-tags">
+                                <span class="resource-tag">编辑器</span>
+                                <span class="resource-tag">开发工具</span>
+                            </div>
+                            <a href="https://code.visualstudio.com/" class="resource-link" target="_blank">访问官网 →</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-item" data-category="websites">
+                        <div class="resource-icon">🌐</div>
+                        <div class="resource-content">
+                            <h3>MDN Web Docs</h3>
+                            <p class="resource-description">Mozilla开发者网络，Web开发的最佳参考文档，内容权威且更新及时。</p>
+                            <div class="resource-tags">
+                                <span class="resource-tag">Web开发</span>
+                                <span class="resource-tag">文档</span>
+                            </div>
+                            <a href="https://developer.mozilla.org/" class="resource-link" target="_blank">访问网站 →</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-item" data-category="learning">
+                        <div class="resource-icon">🎓</div>
+                        <div class="resource-content">
+                            <h3>Coursera</h3>
+                            <p class="resource-description">在线学习平台，提供来自世界顶级大学和公司的课程，涵盖多个领域。</p>
+                            <div class="resource-tags">
+                                <span class="resource-tag">在线教育</span>
+                                <span class="resource-tag">课程</span>
+                            </div>
+                            <a href="https://www.coursera.org/" class="resource-link" target="_blank">访问平台 →</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-item" data-category="books">
+                        <div class="resource-icon">📖</div>
+                        <div class="resource-content">
+                            <h3>《设计模式》</h3>
+                            <p class="resource-description">Gang of Four的经典设计模式书籍，是软件架构设计的必读之作。</p>
+                            <div class="resource-tags">
+                                <span class="resource-tag">设计模式</span>
+                                <span class="resource-tag">软件架构</span>
+                            </div>
+                            <a href="#" class="resource-link">了解更多 →</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-item" data-category="tools">
+                        <div class="resource-icon">⚡</div>
+                        <div class="resource-content">
+                            <h3>Git</h3>
+                            <p class="resource-description">分布式版本控制系统，是现代软件开发不可或缺的工具。</p>
+                            <div class="resource-tags">
+                                <span class="resource-tag">版本控制</span>
+                                <span class="resource-tag">协作</span>
+                            </div>
+                            <a href="https://git-scm.com/" class="resource-link" target="_blank">访问官网 →</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-item" data-category="websites">
+                        <div class="resource-icon">💡</div>
+                        <div class="resource-content">
+                            <h3>Stack Overflow</h3>
+                            <p class="resource-description">程序员问答社区，遇到编程问题时的最佳求助平台。</p>
+                            <div class="resource-tags">
+                                <span class="resource-tag">问答</span>
+                                <span class="resource-tag">社区</span>
+                            </div>
+                            <a href="https://stackoverflow.com/" class="resource-link" target="_blank">访问网站 →</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-item" data-category="learning">
+                        <div class="resource-icon">📝</div>
+                        <div class="resource-content">
+                            <h3>LeetCode</h3>
+                            <p class="resource-description">算法练习平台，提供大量编程题目，是提升编程能力的好地方。</p>
+                            <div class="resource-tags">
+                                <span class="resource-tag">算法</span>
+                                <span class="resource-tag">练习</span>
+                            </div>
+                            <a href="https://leetcode.cn/" class="resource-link" target="_blank">访问平台 →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="resource-recommendations">
+                <h2>特别推荐</h2>
+                <div class="recommendations-grid">
+                    <div class="recommendation-item">
+                        <div class="recommendation-header">
+                            <h4>本周推荐</h4>
+                            <span class="recommendation-badge">热门</span>
+                        </div>
+                        <h5>《深入理解计算机系统》</h5>
+                        <p>从程序员的角度深入理解计算机系统的工作原理，是计算机科学的基础读物。</p>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="recommendation-header">
+                            <h4>工具推荐</h4>
+                            <span class="recommendation-badge">实用</span>
+                        </div>
+                        <h5>Notion</h5>
+                        <p>全能的工作空间，集笔记、任务管理、数据库于一体，提高工作效率的利器。</p>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="recommendation-header">
+                            <h4>网站推荐</h4>
+                            <span class="recommendation-badge">优质</span>
+                        </div>
+                        <h5>GitHub</h5>
+                        <p>全球最大的代码托管平台，开源项目的聚集地，学习优秀代码的好地方。</p>
+                    </div>
+                </div>
+        </section>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html> 

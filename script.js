@@ -1,161 +1,191 @@
-// 项目筛选功能
+// Language switching functionality
 document.addEventListener('DOMContentLoaded', function() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-
-    filterButtons.forEach(button => {
+    // Initialize language from localStorage or default to Chinese
+    const currentLang = localStorage.getItem('language') || 'zh';
+    
+    // Set initial language
+    setLanguage(currentLang);
+    
+    // Add event listeners to language buttons
+    const langButtons = document.querySelectorAll('.lang-btn');
+    langButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // 移除所有按钮的active类
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            // 为当前按钮添加active类
-            this.classList.add('active');
-
-            const filter = this.getAttribute('data-filter');
-
-            projectCards.forEach(card => {
-                if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeIn 0.5s ease-in';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+            const lang = this.getAttribute('data-lang');
+            setLanguage(lang);
+            localStorage.setItem('language', lang);
         });
     });
-
-    // 文字创作分类筛选功能
-    const categoryButtons = document.querySelectorAll('.category-btn');
-    const writingItems = document.querySelectorAll('.writing-item');
-
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // 移除所有按钮的active类
-            categoryButtons.forEach(btn => btn.classList.remove('active'));
-            // 为当前按钮添加active类
-            this.classList.add('active');
-
-            const category = this.getAttribute('data-category');
-
-            writingItems.forEach(item => {
-                if (category === 'all' || item.getAttribute('data-category') === category) {
-                    item.style.display = 'block';
-                    item.style.animation = 'fadeIn 0.5s ease-in';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+    
+    function setLanguage(lang) {
+        // Update active button
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('active');
         });
-    });
-
-    // 资源分类筛选功能
-    const resourceCategoryButtons = document.querySelectorAll('.resource-category-btn');
-    const resourceItems = document.querySelectorAll('.resource-item');
-
-    resourceCategoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // 移除所有按钮的active类
-            resourceCategoryButtons.forEach(btn => btn.classList.remove('active'));
-            // 为当前按钮添加active类
-            this.classList.add('active');
-
-            const category = this.getAttribute('data-category');
-
-            resourceItems.forEach(item => {
-                if (category === 'all' || item.getAttribute('data-category') === category) {
-                    item.style.display = 'flex';
-                    item.style.animation = 'fadeIn 0.5s ease-in';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        });
-    });
-});
-
-// 平滑滚动效果
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
+        
+        // Update page content based on language
+        if (lang === 'en') {
+            setEnglishContent();
+        } else {
+            setChineseContent();
         }
-    });
-});
-
-// 导航栏滚动效果
-window.addEventListener('scroll', function() {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(227, 240, 252, 0.95)';
-        navbar.style.backdropFilter = 'blur(10px)';
-    } else {
-        navbar.style.background = '#e3f0fc';
-        navbar.style.backdropFilter = 'none';
     }
-});
-
-// 添加淡入动画
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// 观察所有卡片元素
-document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.feature-card, .project-card, .about-card, .achievement-item, .writing-item, .resource-item, .contact-method, .availability-item');
-    cards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
-    });
-
-    // 联系表单处理
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+    
+    function setEnglishContent() {
+        // Navigation links
+        const navLinks = {
+            'index.html': 'Home',
+            'about.html': 'About',
+            'writing.html': 'Writing',
+            'projects.html': 'Projects',
+            'resources.html': 'Resources',
+            'contact.html': 'Contact'
+        };
+        
+        // Update navigation text
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            const href = link.getAttribute('href');
+            if (navLinks[href]) {
+                link.textContent = navLinks[href];
+            }
+        });
+        
+        // Update page title and content based on current page
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        updatePageContent(currentPage, 'en');
+    }
+    
+    function setChineseContent() {
+        // Navigation links
+        const navLinks = {
+            'index.html': '首页',
+            'about.html': '关于我',
+            'writing.html': '文字创作',
+            'projects.html': '成就与项目',
+            'resources.html': '资源分享',
+            'contact.html': '联系方式'
+        };
+        
+        // Update navigation text
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            const href = link.getAttribute('href');
+            if (navLinks[href]) {
+                link.textContent = navLinks[href];
+            }
+        });
+        
+        // Update page title and content based on current page
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        updatePageContent(currentPage, 'zh');
+    }
+    
+    function updatePageContent(page, lang) {
+        // Content translations
+        const translations = {
+            'index.html': {
+                'zh': {
+                    title: '我的简历网站 - 首页',
+                    heroTitle: '你好，我是文酱不酱',
+                    heroSubtitle: '热爱创作与分享的探索者',
+                    heroDescription: '这里记录了我的成长历程、文字创作、项目经验与资源分享。欢迎来到我的个人空间，一起交流学习！',
+                    learnMore: '了解更多',
+                    contactMe: '联系我',
+                    expertise: '我的专长领域',
+                    writing: '文字创作',
+                    writingDesc: '诗歌、散文、小说创作，用文字记录生活感悟与思考',
+                    viewWorks: '查看作品 →',
+                    development: '项目开发',
+                    devDesc: 'Web开发、数据分析、自动化工具等项目经验分享',
+                    viewProjects: '查看项目 →',
+                    resources: '资源分享',
+                    resourcesDesc: '精选书籍、工具、学习资源，与大家共同成长',
+                    viewResources: '查看资源 →',
+                    latestUpdates: '最新动态',
+                    newProject: '新项目上线',
+                    newProjectDesc: '完成了个人网站的重构，采用现代化的设计风格',
+                    newArticle: '新文章发布',
+                    newArticleDesc: '在文字创作栏目新增了《冬日随想》系列文章',
+                    resourceUpdate: '资源更新',
+                    resourceUpdateDesc: '在资源分享中添加了2024年推荐书单'
+                },
+                'en': {
+                    title: 'My Portfolio Website - Home',
+                    heroTitle: 'Hello, I\'m Wen Jiang',
+                    heroSubtitle: 'A Creative Explorer Who Loves Sharing',
+                    heroDescription: 'This is where I record my growth journey, creative writing, project experiences, and resource sharing. Welcome to my personal space, let\'s learn and grow together!',
+                    learnMore: 'Learn More',
+                    contactMe: 'Contact Me',
+                    expertise: 'My Areas of Expertise',
+                    writing: 'Creative Writing',
+                    writingDesc: 'Poetry, prose, and fiction writing, recording life insights and thoughts with words',
+                    viewWorks: 'View Works →',
+                    development: 'Project Development',
+                    devDesc: 'Web development, data analysis, automation tools and other project experience sharing',
+                    viewProjects: 'View Projects →',
+                    resources: 'Resource Sharing',
+                    resourcesDesc: 'Curated books, tools, learning resources, growing together with everyone',
+                    viewResources: 'View Resources →',
+                    latestUpdates: 'Latest Updates',
+                    newProject: 'New Project Launched',
+                    newProjectDesc: 'Completed the reconstruction of personal website with modern design style',
+                    newArticle: 'New Article Published',
+                    newArticleDesc: 'Added "Winter Thoughts" series articles to the creative writing section',
+                    resourceUpdate: 'Resource Update',
+                    resourceUpdateDesc: 'Added 2024 recommended book list to resource sharing'
+                }
+            }
+        };
+        
+        if (translations[page] && translations[page][lang]) {
+            const content = translations[page][lang];
             
-            // 获取表单数据
-            const formData = new FormData(contactForm);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const subject = formData.get('subject');
-            const message = formData.get('message');
+            // Update page title
+            document.title = content.title;
             
-            // 简单的表单验证
-            if (!name || !email || !subject || !message) {
-                alert('请填写所有必填字段');
-                return;
+            // Update content elements
+            updateElementText('h1', content.heroTitle);
+            updateElementText('.hero-subtitle', content.heroSubtitle);
+            updateElementText('.hero-description', content.heroDescription);
+            updateElementText('.btn-primary', content.learnMore);
+            updateElementText('.btn-secondary', content.contactMe);
+            updateElementText('h2', content.expertise);
+            
+            // Update feature cards
+            const featureCards = document.querySelectorAll('.feature-card');
+            if (featureCards.length >= 3) {
+                updateElementText(featureCards[0].querySelector('h3'), content.writing);
+                updateElementText(featureCards[0].querySelector('p'), content.writingDesc);
+                updateElementText(featureCards[0].querySelector('.feature-link'), content.viewWorks);
+                
+                updateElementText(featureCards[1].querySelector('h3'), content.development);
+                updateElementText(featureCards[1].querySelector('p'), content.devDesc);
+                updateElementText(featureCards[1].querySelector('.feature-link'), content.viewProjects);
+                
+                updateElementText(featureCards[2].querySelector('h3'), content.resources);
+                updateElementText(featureCards[2].querySelector('p'), content.resourcesDesc);
+                updateElementText(featureCards[2].querySelector('.feature-link'), content.viewResources);
             }
             
-            // 模拟发送邮件
-            const submitBtn = contactForm.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
-            
-            submitBtn.textContent = '发送中...';
-            submitBtn.disabled = true;
-            
-            // 模拟异步操作
-            setTimeout(() => {
-                alert('消息发送成功！我会尽快回复您。');
-                contactForm.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
-        });
+            // Update latest updates section
+            updateElementText('.latest-updates h2', content.latestUpdates);
+            const updateItems = document.querySelectorAll('.update-item');
+            if (updateItems.length >= 3) {
+                updateElementText(updateItems[0].querySelector('h4'), content.newProject);
+                updateElementText(updateItems[0].querySelector('p'), content.newProjectDesc);
+                
+                updateElementText(updateItems[1].querySelector('h4'), content.newArticle);
+                updateElementText(updateItems[1].querySelector('p'), content.newArticleDesc);
+                
+                updateElementText(updateItems[2].querySelector('h4'), content.resourceUpdate);
+                updateElementText(updateItems[2].querySelector('p'), content.resourceUpdateDesc);
+            }
+        }
+    }
+    
+    function updateElementText(selector, text) {
+        const element = document.querySelector(selector);
+        if (element && text) {
+            element.textContent = text;
+        }
     }
 });

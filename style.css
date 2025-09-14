@@ -37,14 +37,40 @@ body {
 }
 
 .nav-links a {
-    color: #3498db;
+    color: #000;
     text-decoration: none;
     font-size: 1rem;
-    transition: color 0.2s;
+    position: relative;
+    padding: 0.3rem 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.nav-links a::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: #1e3a8a;
+    border-radius: 50% 30% 70% 40%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: -1;
+    opacity: 0;
+}
+
+.nav-links a:hover::before {
+    width: 120%;
+    height: 140%;
+    border-radius: 45% 35% 65% 55%;
+    transform: translate(-50%, -50%) rotate(15deg);
+    opacity: 1;
 }
 
 .nav-links a:hover {
-    color: #217dbb;
+    color: #1e3a8a;
+    font-weight: bold;
 }
 
 .main-content {
@@ -305,6 +331,16 @@ button:hover, .btn:hover {
     .nav-links {
         flex-wrap: wrap;
         gap: 1rem;
+    }
+    
+    .language-switch {
+        margin-left: 1rem;
+        margin-top: 0.5rem;
+    }
+    
+    .lang-btn {
+        font-size: 0.8rem;
+        padding: 0.2rem 0.4rem;
     }
 }
 
@@ -1491,25 +1527,45 @@ button:hover, .btn:hover {
     margin-left: 8px;
 }
 
+/* Language Switch Styles */
+.language-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 2rem;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.lang-btn:hover {
+    color: #1e3a8a;
+    background: rgba(30, 58, 138, 0.1);
+}
+
+.lang-btn.active {
+    color: #1e3a8a;
+    font-weight: bold;
+    background: rgba(30, 58, 138, 0.15);
+}
+
+.lang-separator {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
 /* Enhanced hover effects */
 .nav-links a {
     position: relative;
-    overflow: hidden;
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: -100%;
-    width: 100%;
-    height: 2px;
-    background: #3498db;
-    transition: left 0.3s ease;
-}
-
-.nav-links a:hover::after {
-    left: 0;
 }
 
 /* Smooth transitions for all interactive elements */
